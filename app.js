@@ -23,9 +23,9 @@ app.use("/orders", verifyToken, isAdmin,orderRoutes);
 app.use("/product", verifyToken, isAdmin, productRoutes);
 app.use("/customer", verifyToken,customerRoutes)
 app.use("/auth", userRoutes)
-
+const uri = "mongodb+srv://naveen:naveen@cluster0.mhx6e.mongodb.net/?appName=Cluster0"
 async function connectionDB() {
-    await mongoose.connect("mongodb://localhost:27017", {
+    await mongoose.connect(uri, {
         dbName: "e-comm-store-db"
     });
     console.log("MongoDB connected sucessfully")
