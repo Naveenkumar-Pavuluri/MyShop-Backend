@@ -1,17 +1,18 @@
 # 🛒 MyShop — Backend API
 
-A RESTful backend API for the **MyShop** e-commerce platform. Handles authentication, product management, cart, wishlist, and order processing.
+A RESTful backend API for the **MyShop** e-commerce platform built with **Node.js**, **Express**, and **MongoDB**. Handles authentication, product management, cart, wishlist, orders and more.
 
 ---
 
 ## ✨ Features
 
-- 🔐 **User Authentication** — Register, login, logout with session/token management
-- 📦 **Product Management** — CRUD operations for products with category support
+- 🔐 **JWT Authentication** — Register, login, logout with token-based auth
+- 📦 **Product Management** — CRUD operations with category and brand support
 - 🛒 **Cart API** — Add, update, and remove cart items per user
 - ❤️ **Wishlist API** — Save and retrieve wishlist items
 - 🗃️ **Orders API** — Place orders and retrieve order history
-- 🗂️ **Category Support** — Filter products by Mobiles, Electronics, Fashion, Grocery, etc.
+- 🗂️ **Category & Brand** — Organized product filtering
+- 🛡️ **Middleware** — Auth guards and request validation
 
 ---
 
@@ -19,13 +20,11 @@ A RESTful backend API for the **MyShop** e-commerce platform. Handles authentica
 
 | Tech | Purpose |
 |------|---------|
-| Java / Spring Boot *(or Node.js / Express)* | Backend framework |
-| REST API | Communication protocol |
-| MySQL / PostgreSQL / MongoDB | Database |
-| JWT / Session | Authentication |
-| Maven / npm | Build tool |
-
-> ⚠️ Update the table above to match your actual stack.
+| Node.js | Runtime environment |
+| Express.js | Web framework |
+| MongoDB | NoSQL database |
+| JWT | Authentication |
+| JavaScript | Language |
 
 ---
 
@@ -33,32 +32,52 @@ A RESTful backend API for the **MyShop** e-commerce platform. Handles authentica
 
 ### Prerequisites
 
-- Java 17+ (if Spring Boot) **or** Node.js 18+ (if Express)
-- MySQL / PostgreSQL / MongoDB running locally
-- Maven / npm
+- Node.js (v18+)
+- MongoDB (local or MongoDB Atlas)
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/myshop-backend.git
-cd myshop-backend
-```
+git clone https://github.com/Naveenkumar-Pavuluri/MyShop-Backend.git
+cd MyShop-Backend
 
-**If Spring Boot:**
-```bash
-# Configure your DB in src/main/resources/application.properties
-./mvnw spring-boot:run
-```
-
-**If Node.js / Express:**
-```bash
+# Install dependencies
 npm install
-cp .env.example .env   # Set your DB credentials and JWT secret
-npm start
+
+# Start the server
+node app.js
 ```
 
-The server will run at `http://localhost:8080`.
+The server will run at `http://localhost:3000`.
+
+---
+
+## 📁 Project Structure
+
+```
+BACKEND/
+├── db/
+│   ├── brand.js          # Brand DB operations
+│   ├── cart.js           # Cart DB operations
+│   ├── category.js       # Category DB operations
+│   ├── order.js          # Order DB operations
+│   ├── product.js        # Product DB operations
+│   ├── users.js          # User DB operations
+│   └── wishlist.js       # Wishlist DB operations
+├── handlers/             # Request handler logic
+├── middleware/           # Auth & validation middleware
+├── routes/
+│   ├── auth.js           # Auth routes (login, register)
+│   ├── brand.js          # Brand routes
+│   ├── category.js       # Category routes
+│   ├── order.js          # Order routes
+│   ├── product.js        # Product routes
+│   └── public.js         # Public routes (no auth required)
+├── app.js                # Entry point
+├── package.json
+└── package-lock.json
+```
 
 ---
 
@@ -68,15 +87,16 @@ The server will run at `http://localhost:8080`.
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | POST | `/api/auth/register` | Register a new user |
-| POST | `/api/auth/login` | Login and receive token |
-| POST | `/api/auth/logout` | Logout current user |
+| POST | `/api/auth/login` | Login and receive JWT token |
 
 ### Products
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | `/api/products` | Get all products |
 | GET | `/api/products/:id` | Get single product |
-| GET | `/api/products?category=mobiles` | Filter by category |
+| POST | `/api/products` | Add new product |
+| PUT | `/api/products/:id` | Update product |
+| DELETE | `/api/products/:id` | Delete product |
 
 ### Cart
 | Method | Endpoint | Description |
@@ -100,19 +120,6 @@ The server will run at `http://localhost:8080`.
 
 ---
 
-## 📁 Project Structure
-
-```
-src/
-├── controllers/      # Route handlers / REST controllers
-├── models/           # Database models / entities
-├── services/         # Business logic layer
-├── repositories/     # DB access layer (if Spring Data / Mongoose)
-├── config/           # App config (DB, security, CORS)
-└── main entry file
-```
-
-
 ## 🔗 Frontend
 
 This backend powers the **MyShop Frontend** Angular application.
@@ -123,6 +130,6 @@ This backend powers the **MyShop Frontend** Angular application.
 
 ## 🤝 Contributing
 
-Pull requests are welcome! Please open an issue first for major changes.
+Pull requests are welcome! For major changes, please open an issue first to discuss what you'd like to change.
 
 ---
