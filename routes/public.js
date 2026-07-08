@@ -7,7 +7,7 @@ const { getCategories } = require("../handlers/category-handler");
 const { getBrands } = require("../handlers/brand-handler");
 const { getWishList, addToWishList, removeFromWishList } = require("../handlers/wishlist-handler");
 const { getCart, addToCart, removeFromCart, clearCart } = require("../handlers/cart-handler");
-const { addOrder, getCustomerOders} = require("../handlers/order-handler");
+const { addOrder, getCustomerOders } = require("../handlers/order-handler");
 
 router.get("/new-products", async (req, res) => {
     let products = await getNewProducts();
@@ -86,17 +86,17 @@ router.delete("/cart/:id", async (req, res) => {
     })
 })
 
-router.post("/order", async(req,res)=>{
+router.post("/order", async (req, res) => {
     const userId = req.user.id;
     const order = req.body;
-    await addOrder(userId,order);
+    await addOrder(userId, order);
     await clearCart(userId);
     res.send({
-        message:"Order Created Sucessfully"
+        message: "Order Created Sucessfully"
     })
 });
 
-router.get("/order", async(req,res)=>{
+router.get("/order", async (req, res) => {
     const userId = req.user.id;
     let orders = await getCustomerOders(userId);
     res.send(orders);

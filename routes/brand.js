@@ -18,7 +18,7 @@ router.post("", async (req, res) => {
 router.put("/:id", async (req, res) => {
     let id = req.params["id"];
     let model = req.body;
-    let result = await updateBrand(id,model);
+    let result = await updateBrand(id, model);
     res.send({ message: "updated" });
 })
 
@@ -31,7 +31,7 @@ router.get("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
     let id = req.params["id"];
     let result = await deleteBrand(id);
-    res.send({message: "deleted" });
+    res.send({ message: "deleted" });
 })
 
 module.exports = router;

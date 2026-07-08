@@ -1,36 +1,34 @@
 const express = require("express");
 const router = express.Router();
-const {getRegisterUsers, getLoginUsers} = require("./../handlers/user-handler")
+const { getRegisterUsers, getLoginUsers } = require("./../handlers/user-handler")
 
-router.post("/register",async (req,res)=>{
+router.post("/register", async (req, res) => {
     let model = req.body;
-    if(model.name && model.password && model.email){
+    if (model.name && model.password && model.email) {
         await getRegisterUsers(model);
-        res.send({message:"User registered"});
-    }else{
+        res.send({ message: "User registered" });
+    } else {
         res.status(400).json({
-            error:"Please provide name, email and password"
+            error: "Please provide name, email and password"
         })
     }
 })
 
-router.post("/login",async(req,res)=>{
+router.post("/login", async (req, res) => {
     let model = req.body;
-    if(model.email && model.password){
+    if (model.email && model.password) {
         const result = await getLoginUsers(model);
-        if(result)
-        {
+        if (result) {
             res.send(result);
         }
-        else{
+        else {
             res.status(400).json({
-                message:"email or Password is incorrect"
+                message: "email or Password is incorrect"
             })
         }
-    }else
-    {
+    } else {
         res.status(400).json({
-            message:"Please provide email and password"
+            message: "Please provide email and password"
         })
     }
 })

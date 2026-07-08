@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken")
 
 async function getRegisterUsers(model) {
-    let hashedPassword = await bcrypt.hash(model.password,10);
+    let hashedPassword = await bcrypt.hash(model.password, 10);
     let user = new User({
         name: model.name,
         email: model.email,
@@ -13,25 +13,25 @@ async function getRegisterUsers(model) {
 }
 
 async function getLoginUsers(model) {
-    const user = await User.findOne({email:model.email});
-    if(!user){
+    const user = await User.findOne({ email: model.email });
+    if (!user) {
         return null;
     }
     const isMatched = await bcrypt.compare(model.password, user.password);
-    if(isMatched){
+    if (isMatched) {
         const token = jwt.sign(
             {
-                id:user._id,
-                name:user.name,
-                email:user.email,
+                id: user._id,
+                name: user.name,
+                email: user.email,
                 isAdmin: user.isAdmin || false,
             },
-            "secret",{
-                expiresIn:"1hr"
-            }
+            "secret", {
+            expiresIn: "1hr"
+        }
         );
-        return {token, user};
-    }else{
+        return { token, user };
+    } else {
         return null;
     }
 }

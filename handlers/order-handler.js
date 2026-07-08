@@ -14,15 +14,15 @@ async function getCustomerOders(userId) {
     return orders.map((x) => x.toObject());
 }
 
-async function getOrders(){
+async function getOrders() {
     const orders = await Order.find();
-    return orders.map((x)=>x.toObject());
+    return orders.map((x) => x.toObject());
 }
 
-async function updateOrderStatus(id,status){
-    return await Order.findByIdAndUpdate(id,{
-        status:status
+async function updateOrderStatus(id, status) {
+    return await Order.findByIdAndUpdate(id, {
+        status: status
     })
 }
 
-module.exports = { addOrder, getCustomerOders, getOrders, updateOrderStatus}
+module.exports = { addOrder, getCustomerOders, getOrders, updateOrderStatus }

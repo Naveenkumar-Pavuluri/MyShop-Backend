@@ -26,4 +26,4 @@ async function deleteCategory(id) {
     return await Category.findByIdAndDelete(id);
 }
 
-module.exports = { getCategories, addCategory, updateCategory, deleteCategory , getCategoryById}
+module.exports = { getCategories, addCategory, updateCategory, deleteCategory, getCategoryById }

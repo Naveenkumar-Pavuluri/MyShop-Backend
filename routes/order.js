@@ -1,5 +1,5 @@
 const express = require("express");
-const { getOrders,updateOrderStatus } = require("../handlers/order-handler");
+const { getOrders, updateOrderStatus } = require("../handlers/order-handler");
 const router = express.Router();
 
 router.get("", async (req, res) => {
@@ -10,9 +10,9 @@ router.get("", async (req, res) => {
 router.post("/:id", async (req, res) => {
     const id = req.params.id;
     const status = req.body.status;
-    await updateOrderStatus(id,status);
+    await updateOrderStatus(id, status);
     res.send({
-        message:"updated"
+        message: "updated"
     })
 })
 

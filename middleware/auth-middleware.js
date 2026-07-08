@@ -1,30 +1,30 @@
 const jwt = require("jsonwebtoken");
 
-function verifyToken(req,res,next){
+function verifyToken(req, res, next) {
     const token = req.header("Authorization");
 
-    if(!token){
+    if (!token) {
         return res.status(401).send({
-            error:"Access Denied",
+            error: "Access Denied",
         })
     }
-    try{
+    try {
         const decode = jwt.verify(token, "secret");
         req.user = decode;
         next();
-    }catch(err){
+    } catch (err) {
         return res.status(401).send({
-            error:"Invalid Token"
+            error: "Invalid Token"
         })
     }
 }
 
 function isAdmin(req, res, next) {
-    if(req.user && req.user.isAdmin){
+    if (req.user && req.user.isAdmin) {
         next();
-    }else{
+    } else {
         return res.status(403).send({
-            error:"Forbidden Authorization",
+            error: "Forbidden Authorization",
         })
     }
 }

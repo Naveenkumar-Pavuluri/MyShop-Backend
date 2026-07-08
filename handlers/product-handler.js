@@ -45,7 +45,7 @@ async function getProductsListings(searchTerm, categoryId, page, pageSize, sortB
 
     if (searchTerm && searchTerm.trim() !== "") {
         queryFilter.$or = [
-            { name: { $regex: searchTerm, $options: "i" } }, 
+            { name: { $regex: searchTerm, $options: "i" } },
             { shortDescription: { $regex: searchTerm, $options: "i" } }
         ];
     }
